@@ -31,6 +31,6 @@ public final class InGameMOTD implements Listener {
         String rendered = motd
                 .replace("%PLAYER%", player.getName())
                 .replace("%VERSION%", Bukkit.getMinecraftVersion());
-        player.sendMessage(MOTDUtil.legacyComponent(rendered));
+        player.sendMessage(MOTDUtil.legacyText(rendered));
     }
 }
