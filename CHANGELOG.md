@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.1 - 2026-09-12
+
+- Fixed a runtime `NoSuchMethodError` on Paper servers caused by linking directly to an incompatible Adventure legacy serializer.
+- MOTD colour codes are now translated through Bukkit's stable legacy text API for both server-list and in-game MOTDs.
+
 ## 1.4.0 - 2026-09-12
 
 First maintained continuation release.

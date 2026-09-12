@@ -6,7 +6,7 @@
 
     <groupId>io.github.prof1611</groupId>
     <artifactId>randommotd-reborn</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.1</version>
     <name>RandomMOTD Reborn</name>
     <description>Maintained continuation of RandomMOTD for modern Paper servers.</description>
     <url>https://github.com/Prof1611/RandomMOTD-Reborn</url>

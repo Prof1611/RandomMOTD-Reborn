@@ -31,6 +31,6 @@ public final class ServerMOTD implements Listener {
         }
 
         String rendered = motd.replace("%VERSION%", Bukkit.getMinecraftVersion());
-        event.motd(MOTDUtil.legacyComponent(rendered));
+        event.setMotd(MOTDUtil.legacyText(rendered));
     }
 }

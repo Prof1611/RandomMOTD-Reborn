@@ -1,14 +1,11 @@
 package com.ThunderKofy;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.ChatColor;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 final class MOTDUtil {
-    private static final LegacyComponentSerializer LEGACY = LegacyComponentSerializer.legacyAmpersand();
-
     private MOTDUtil() {}
 
     static String randomEntry(List<String> entries) {
@@ -18,7 +15,7 @@ final class MOTDUtil {
         return entries.get(ThreadLocalRandom.current().nextInt(entries.size()));
     }
 
-    static Component legacyComponent(String text) {
-        return LEGACY.deserialize(text == null ? "" : text);
+    static String legacyText(String text) {
+        return ChatColor.translateAlternateColorCodes('&', text == null ? "" : text);
     }
 }
