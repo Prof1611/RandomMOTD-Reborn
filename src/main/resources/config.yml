@@ -1,0 +1,33 @@
+#Configurations for in game MOTD.
+in-game:
+  #Do you want in game MOTD to be enabled? If you don't want this to be enabled, just set this to false.
+  enabled: true
+  #The list of the motd that you are going to use in your server.
+  motd:
+    #%PLAYER% gets replaced by the name of the player.
+    #%VERSION% gets replaced with the version the server is running.
+    - "&4Enjoy your stay at our server sir :)"
+    - "Hello &4%PLAYER%&4!"
+    - "A very &1C&2o&3l&4o&5u&6r&7f&8u&9l&r welcome to you %PLAYER%!"
+  # - "Another MOTD here"
+#Configurations for system MOTD.
+system:
+  #Do you want the system MOTD to be enabled? Set this to false if you don't want this.
+  enabled: true
+  #The system MOTD that will be visible to players when they refresh their server list.
+  #%VERSION% gets replaced with the version of the server.
+  motd:
+
+    #These are the MOTDs when the server is not whitelisted.
+    normal:
+      - "&3Welcome player!&r Running &3Minecraft %VERSION%&r now"
+      - "Hello sir! Don't wait to play at our server! &4Join now!&r"
+    #- "Another MOTD here"
+
+    #These are the MOTDs which shows up when the server is whitelisted.
+    whitelist:
+      - "&4The server is currently whitelisted!&r\nPlease come back later."
+      - "Hey you can't play here since the server is whitelisted for a while."
+    #  - "Another MOTD here"
+
+#Original author: Phoenix852 from ThunderKofy
