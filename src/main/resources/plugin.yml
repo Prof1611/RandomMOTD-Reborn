@@ -1,0 +1,40 @@
+name: RandomMOTD
+main: com.ThunderKofy.RandomMOTD
+version: '${project.version}'
+api-version: '1.21.4'
+author: Phoenix852
+contributors: [Prof1611]
+website: https://github.com/Prof1611/RandomMOTD-Reborn
+description: Random in-game and server-list MOTDs. Maintained continuation of the original RandomMOTD by Phoenix852 / ThunderKofy.
+prefix: ThunderKofy | RandomMOTD
+permissions:
+  RandomMOTD.*:
+    default: op
+    description: Grants access to all RandomMOTD commands.
+    children:
+      RandomMOTD.main: true
+      RandomMOTD.help: true
+      RandomMOTD.motd: true
+      RandomMOTD.reload: true
+      RandomMOTD.author: true
+  RandomMOTD.main:
+    default: op
+    description: Grants access to /randommotd.
+  RandomMOTD.help:
+    default: op
+    description: Grants access to /randommotd help.
+  RandomMOTD.motd:
+    default: op
+    description: Grants access to /randommotd motd.
+  RandomMOTD.reload:
+    default: op
+    description: Grants access to /randommotd reload.
+  RandomMOTD.author:
+    default: op
+    description: Grants access to /randommotd author.
+commands:
+  randommotd:
+    description: RandomMOTD management command.
+    aliases: [rmotd, randmotd]
+    permission: RandomMOTD.main
+    permission-message: '§4You are not permitted to use this command! Please contact the server administrators if you think this is a server-side error or bug.'
