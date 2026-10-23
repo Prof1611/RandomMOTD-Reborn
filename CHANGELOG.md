@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.5.0 - 2026-10-23 (unreleased)
+## 1.5.0 - 2026-10-23
 
 - Set Paper 1.21 as the minimum API version for one JAR across newer releases.
 - Kept Java 21 bytecode for compatibility with older supported servers.
