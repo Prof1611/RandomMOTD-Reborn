@@ -66,3 +66,77 @@ jobs:
           gh release create "$tag" target/RandomMOTD-*.jar \
             --title "RandomMOTD Reborn $tag" \
             --generate-notes
+
+  compatibility:
+    name: Paper ${{ matrix.minecraft }} runtime
+    if: github.event_name == 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - minecraft: '1.21'
+            java: '21'
+          - minecraft: '26.3'
+            java: '25'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Set up server Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+      - name: Download built plugin
+        uses: actions/download-artifact@v4
+        with:
+          pattern: RandomMOTD-*
+          merge-multiple: true
+          path: plugin-build
+      - name: Start Paper and check plugin
+        env:
+          MC_VERSION: ${{ matrix.minecraft }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p smoke/plugins
+          cp plugin-build/RandomMOTD-*.jar smoke/plugins/
+          printf 'eula=true\\n' > smoke/eula.txt
+          AGENT='RandomMOTD-Reborn-compatibility-tests/1.0 (https://github.com/Prof1611/RandomMOTD-Reborn)'
+          RESPONSE=$(curl --fail --silent --show-error --retry 3 -H "User-Agent: $AGENT" "https://fill.papermc.io/v3/projects/paper/versions/$MC_VERSION/builds")
+          URL=$(jq -r 'first(.[] | select(.channel == "STABLE") | .downloads."server:default".url) // empty' <<< "$RESPONSE")
+          if [ -z "$URL" ]; then
+            echo "No stable Paper build for $MC_VERSION" >&2
+            exit 1
+          fi
+          curl --fail --location --silent --show-error --retry 3 -H "User-Agent: $AGENT" "$URL" -o smoke/paper.jar
+          cd smoke
+          timeout 150s java -Xms256M -Xmx1200M -jar paper.jar --nogui > server.log 2>&1 &
+          PID=$!
+          started=0
+          for i in $(seq 1 150); do
+            if grep -q 'Done (.*)! For help, type "help"' server.log; then
+              started=1
+              break
+            fi
+            if ! kill -0 "$PID" 2>/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          tail -n 90 server.log
+          if [ "$started" -ne 1 ]; then
+            echo 'Paper did not finish starting' >&2
+            exit 1
+          fi
+          if ! grep -Eiq '(Enabling RandomMOTD|Enabled RandomMOTD)' server.log; then
+            echo 'RandomMOTD was not enabled' >&2
+            exit 1
+          fi
+          if grep -Eiq '(Error occurred while enabling RandomMOTD|Could not load.*RandomMOTD|UnsupportedClassVersionError|NoSuchMethodError|NoClassDefFoundError)' server.log; then
+            echo 'Plugin compatibility error in startup logs' >&2
+            exit 1
+          fi
+          echo "PASS: RandomMOTD loaded on Paper $MC_VERSION (Java $(java -version 2>&1 | head -n 1))"
