@@ -3,7 +3,7 @@
 [![Latest release](https://img.shields.io/github/v/release/Prof1611/RandomMOTD-Reborn?style=flat-square&label=release)](https://github.com/Prof1611/RandomMOTD-Reborn/releases)
 [![Build](https://github.com/Prof1611/RandomMOTD-Reborn/actions/workflows/build.yml/badge.svg)](https://github.com/Prof1611/RandomMOTD-Reborn/actions/workflows/build.yml)
 [![SpigotMC](https://img.shields.io/badge/SpigotMC-Resource-F07A0A?style=flat-square)](https://www.spigotmc.org/resources/randommotd-reborn.138755/)
-[![Paper](https://img.shields.io/badge/Paper-1.21.4-222222?style=flat-square)](https://papermc.io/)
+[![Paper](https://img.shields.io/badge/Paper-1.21%2B-222222?style=flat-square)](https://papermc.io/)
 [![Java](https://img.shields.io/badge/Java-21-ED8B00?style=flat-square&logo=openjdk&logoColor=white)](https://adoptium.net/)
 [![License](https://img.shields.io/github/license/Prof1611/RandomMOTD-Reborn?style=flat-square)](LICENSE)
 
@@ -29,11 +29,11 @@ RandomMOTD Reborn is an independently maintained continuation of **RandomMOTD**,
 
 | | Supported |
 | --- | --- |
-| Server | Paper 1.21.4 |
-| Java | 21 |
-| Current release | 1.4.0 |
+| Server | Paper 1.21 through 26.3 (startup tested at both endpoints) |
+| Java | Java 21 for Minecraft 1.21.x; Java 25 for Minecraft 26.x |
+| Current version | 1.5.0 |
 
-RandomMOTD Reborn is currently tested against **Paper 1.21.4**. Other server implementations or Minecraft versions should not be assumed compatible unless explicitly listed.
+This build targets the Paper 1.21 API and uses Java 21 bytecode so a single JAR can be installed across the 1.21.x and 26.x release lines. The Java runtime required by the server varies with its Minecraft version. Automated GitHub Actions tests have confirmed successful plugin startup on Paper 1.21 (Java 21) and Paper 26.3 (Java 25). Intermediate Minecraft releases and MOTD behaviour (server-list pings, join messages and reloads) have not yet been tested end to end. Spigot compatibility is not guaranteed.
 
 ## Quick start
 
@@ -84,12 +84,16 @@ Aliases: `/rmotd`, `/randmotd`
 
 Wildcard permission: `RandomMOTD.*`
 
+## Version 1.5.0
+
+Version 1.5.0 uses a single JAR for Paper servers from Minecraft 1.21 onwards instead of separate Minecraft-specific builds. It targets the Paper 1.21 API, retains Java 21 bytecode and adds automated Paper 1.21 and 26.3 startup checks. These checks confirm the plugin enables on both tested versions; full MOTD functionality and intermediate server versions remain unverified.
+
 ## What changed from RandomMOTD 1.3.0?
 
 RandomMOTD Reborn modernises the original plugin for current Paper servers rather than simply repackaging the old jar.
 
-- Updated for Paper 1.21.4 and Java 21
-- Server-list MOTDs use Paper's Adventure component API instead of the legacy string setter
+- Uses the Paper 1.21 API as the minimum supported version and Java 21 bytecode
+- Server-list MOTDs use the Bukkit server-list ping API; the legacy setter remains available in Paper 26.3
 - Empty MOTD lists no longer cause selection errors
 - `%VERSION%` reports the current Minecraft version
 - Modern Maven build and GitHub Actions workflow
