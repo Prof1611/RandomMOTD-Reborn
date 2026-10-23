@@ -103,7 +103,7 @@ jobs:
           set -euo pipefail
           mkdir -p smoke/plugins
           cp plugin-build/RandomMOTD-*.jar smoke/plugins/
-          printf 'eula=true\\n' > smoke/eula.txt
+          echo 'eula=true' > smoke/eula.txt
           AGENT='RandomMOTD-Reborn-compatibility-tests/1.0 (https://github.com/Prof1611/RandomMOTD-Reborn)'
           RESPONSE=$(curl --fail --silent --show-error --retry 3 -H "User-Agent: $AGENT" "https://fill.papermc.io/v3/projects/paper/versions/$MC_VERSION/builds")
           URL=$(jq -r 'first(.[] | select(.channel == "STABLE") | .downloads."server:default".url) // empty' <<< "$RESPONSE")
