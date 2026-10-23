@@ -1,7 +1,7 @@
 name: RandomMOTD
 main: com.ThunderKofy.RandomMOTD
 version: '${project.version}'
-api-version: '1.21.4'
+api-version: '1.21'
 author: Phoenix852
 contributors: [Prof1611]
 website: https://github.com/Prof1611/RandomMOTD-Reborn
