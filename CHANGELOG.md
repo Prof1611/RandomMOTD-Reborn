@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.5.0 - 2026-10-23 (unreleased)
+
+- Set Paper 1.21 as the minimum API version for one JAR across newer releases.
+- Kept Java 21 bytecode for compatibility with older supported servers.
+- Added GitHub Actions startup tests on Paper 1.21 (Java 21) and Paper 26.3 (Java 25); both passed.
+- Updated compatibility documentation. Intermediate versions and MOTD functionality have not yet been tested end to end.
+
 ## 1.4.1 - 2026-09-12
 
 - Fixed a runtime `NoSuchMethodError` on Paper servers caused by linking directly to an incompatible Adventure legacy serializer.
