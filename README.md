@@ -31,7 +31,7 @@ RandomMOTD Reborn is an independently maintained continuation of **RandomMOTD**,
 | --- | --- |
 | Server | Paper 1.21 through 26.3 (startup tested at both endpoints) |
 | Java | Java 21 for Minecraft 1.21.x; Java 25 for Minecraft 26.x |
-| Version in development | 1.5.0 |
+| Current version | 1.5.0 |
 
 This build targets the Paper 1.21 API and uses Java 21 bytecode so a single JAR can be installed across the 1.21.x and 26.x release lines. The Java runtime required by the server varies with its Minecraft version. Automated GitHub Actions tests have confirmed successful plugin startup on Paper 1.21 (Java 21) and Paper 26.3 (Java 25). Intermediate Minecraft releases and MOTD behaviour (server-list pings, join messages and reloads) have not yet been tested end to end. Spigot compatibility is not guaranteed.
 
